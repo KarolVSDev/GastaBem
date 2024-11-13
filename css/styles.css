@@ -1,0 +1,26 @@
+/*
+navbar
+*/
+.logo{
+    display: flex;
+    align-items: center;
+    font-size: 1.8rem;
+  }
+  
+  #logo {
+    color: green;
+    transition: var(--transition);
+  }
+  #textlogo{
+    font-size: 2rem;
+  }
+
+  #loginbtn {
+    color: #999999; 
+    text-decoration: underline;
+}
+
+
+
+
+  
