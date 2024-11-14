@@ -10,7 +10,7 @@
     <div class="container">
         <div class="container">
             <div class="form-image">
-                <img src="imagens/loginImg.jpeg">
+                <img src="../imagens/loginImg.jpeg">
             </div>
             
             <div class="form">
@@ -32,7 +32,7 @@
                             <input id="senha" type="password" name="senha" placeholder="Digite sua senha" required>
                         </div>
                         <div>
-                            <span>"Email e Senha incorretos"</span>
+                            <span id="erro-senha" style="color: red;" ; font-size: 0.85rem; margin-right: 15px;></span>
                         </div>
                     </div>
                     <div class="login-button">
@@ -49,13 +49,21 @@
             </div>
         </div>
     </div>
+    
+        
 
     <script>
+        // Seleciona o elemento de erro no início do script
+        const erroSenha = document.getElementById('erro-senha');
+        
         document.getElementById('login-form').addEventListener('submit', async function(e) {
             e.preventDefault(); 
+            // Limpa a mensagem de erro anterior
+            erroSenha.textContent = '';
+            
             const email = document.getElementById('email').value;
             const password = document.getElementById('senha').value;
-
+    
             try {
                 const response = await fetch('http://localhost:5000/login', {
                     method: 'POST',
@@ -64,22 +72,22 @@
                     },
                     body: JSON.stringify({ email, password })
                 });
-
-                const data = await response.json();
-
-                if (response.ok) {
-   console.log('Login bem-sucedido! Token: ' + data.token);
-    localStorage.setItem('authToken', data.token);
-    window.location.href = "../index.html";
-} else {
-    console.log('Erro: ' + data.error);
     
-
-}
+                const data = await response.json();
+    
+                if (response.ok) {
+                    console.log('Login bem-sucedido! Token: ' + data.token);
+                    localStorage.setItem('userToken', data.token);
+                    window.location.href = "../index.html";
+                } else {
+                    console.log('Erro: ' + data.error);
+                    erroSenha.textContent = 'Email ou Senha incorretos!';
+                }
             } catch (error) {
-                alert('Erro na requisição: ' + error.message);
+                erroSenha.textContent = 'Erro ao conectar com o servidor';
             }
         });
     </script>
 </body>
 </html>
+<span id="welcome-text" style="color: #666; font-size: 0.85rem; margin-right: 15px;"></span>
