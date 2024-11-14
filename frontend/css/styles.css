@@ -1,0 +1,27 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px 20px;
+}
+
+.textlogo {
+  display: flex;
+  justify-content: space-between; /* Espaço entre os elementos */
+  align-items: center;
+  width: 100%; /* Ocupa toda largura disponível */
+}
+
+.app-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #000;
+}
+
+.welcome-text {
+  font-size: 0.85rem;
+  font-weight: normal;
+  color: #666;
+  margin-left: auto; /* Empurra para a direita */
+}
