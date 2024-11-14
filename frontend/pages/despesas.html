@@ -19,15 +19,41 @@
             font-weight: bold;
             color: #dc3545;
         }
+        .btn-group .btn-primary {
+            background-color: #f8f9fa;
+            border-color: #dee2e6;
+            color: #6c757d;
+        }
+
+        .btn-group .btn-primary:hover {
+            background-color: #e9ecef;
+            border-color: #dee2e6;
+            color: #495057;
+        }
+
+        .btn-group .btn-primary.active {
+            background-color: #e9ecef;
+            border-color: #dee2e6;
+            color: #495057;
+            box-shadow: none;
+        }
+
+        .btn-group .btn-primary:focus {
+            box-shadow: none;
+        }
     </style>
 </head>
 <body>
-    <!-- Navbar (mesma do index) -->
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <div class="logo" style="display: flex; justify-content: center; align-items: center; font-size: 24px;">
-                <i class="fas fa-dollar-sign" id="logo"></i>
-                <b class="textlogo" id="textlogo">GastaBem</b>
+                <i class="fas fa-dollar-sign" id="logo" style="margin-right: 8px;"></i>
+                <b class="textlogo" id="textlogo" style="font-family: Arial, sans-serif;">GastaBem</b>
+            </div>
+            <div class="btn-group" style="margin-left: 50px;">
+                <a href="../index.html" class="btn btn-primary">Home</a>
+                <a href="despesas.html" class="btn btn-primary active" aria-current="page">Despesas</a>
             </div>
             <div class="ms-auto d-flex align-items-center">
                 <span id="welcome-text" style="color: #666; font-size: 0.85rem; margin-right: 15px;"></span>
@@ -87,7 +113,7 @@
         </div>
     </div>
 
-    <!-- Modal Adicionar Despesa -->
+    <!-- Adicionar Despesa -->
     <div class="modal fade" id="addDespesaModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -134,23 +160,39 @@
 
         async function verificarAutenticacao() {
             const token = localStorage.getItem('userToken');
+            console.log('Token encontrado:', token);
+
             if (!token) {
+                console.log('Nenhum token encontrado, redirecionando para login');
                 window.location.href = '/pages/login.html';
                 return;
             }
 
             try {
+                if (!token.split('.')[1]) {
+                    console.error('Token mal formatado');
+                    throw new Error('Token inválido');
+                }
+
                 const decodedToken = JSON.parse(atob(token.split('.')[1]));
+                console.log('Token decodificado:', decodedToken);
+
+                if (decodedToken.exp && Date.now() >= decodedToken.exp * 1000) {
+                    console.error('Token expirado');
+                    throw new Error('Token expirado');
+                }
+
                 document.getElementById('welcome-text').textContent = `Bem-vindo, ${decodedToken.name || 'Usuário'}`;
             } catch (error) {
-                console.error('Erro ao decodificar token:', error);
+                console.error('Erro detalhado na autenticação:', error);
+                localStorage.removeItem('userToken');
                 window.location.href = '/pages/login.html';
             }
         }
 
         async function carregarDespesas() {
             try {
-                const response = await fetch('/api/gastos', {
+                const response = await fetch('http://localhost:3000/api/gastos', {
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('userToken')}`
                     }
@@ -214,7 +256,7 @@
             const categoria = document.getElementById('categoria').value;
 
             try {
-                const response = await fetch('/api/gastos', {
+                const response = await fetch('http://localhost:3000/api/gastos', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -236,7 +278,7 @@
         async function deletarDespesa(id) {
             if (confirm('Tem certeza que deseja excluir esta despesa?')) {
                 try {
-                    const response = await fetch(`/api/gastos/${id}`, {
+                    const response = await fetch(`http://localhost:3000/api/gastos/${id}`, {
                         method: 'DELETE',
                         headers: {
                             'Authorization': `Bearer ${localStorage.getItem('userToken')}`

@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 const cors = require('cors');
-const sequelize = require('./config/database');
+const sequelize = require('./config/database.js');
 const Gasto = require('./models/gasto');
 
 
@@ -30,7 +30,7 @@ sequelize.sync()
   });
 
 
-app.get('/gastos', async (req, res) => {
+app.get('/api/gastos', async (req, res) => {
   try {
     const gastos = await Gasto.findAll();
     res.json(gastos);
@@ -40,10 +40,15 @@ app.get('/gastos', async (req, res) => {
 });
 
 
-app.post('/gastos', async (req, res) => {
+app.post('/api/gastos', async (req, res) => {
   try {
-    const { nome, valor } = req.body;
-    const novoGasto = await Gasto.create({ nome, valor });
+    const { descricao, valor, categoria } = req.body;
+    const novoGasto = await Gasto.create({ 
+      descricao, 
+      valor, 
+      categoria,
+      data: new Date()
+    });
     res.status(201).json(novoGasto);
   } catch (err) {
     res.status(500).json({ error: 'Erro ao adicionar dados' });
@@ -52,16 +57,17 @@ app.post('/gastos', async (req, res) => {
 
 
 
-app.put('/gastos/:id', async (req, res) => {
+app.put('/api/gastos/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const { nome, valor } = req.body;
+    const { descricao, valor, categoria } = req.body;
     const gasto = await Gasto.findByPk(id);
     if (!gasto) {
       return res.status(404).json({ error: 'Dados não encontrados' });
     }
-    gasto.nome = nome;
+    gasto.descricao = descricao;
     gasto.valor = valor;
+    gasto.categoria = categoria;
     await gasto.save();
     res.json(gasto);
   } catch (err) {
@@ -70,7 +76,7 @@ app.put('/gastos/:id', async (req, res) => {
 });
 
 
-app.delete('/gastos/:id', async (req, res) => {
+app.delete('/api/gastos/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const gasto = await Gasto.findByPk(id);
