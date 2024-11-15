@@ -71,21 +71,37 @@ Antes de começar, certifique-se de ter o seguinte software instalado:
 - **criação dos bancos de dados e instalação de dependencias**
 
 2. **Execute o Script de Configuração:**
-- Na pasta Raiz execute o arquivo de configuração ``setup.bat``
-- O script irá instalar as dependências, criar os bancos de dados e configurar o .gitignore.
+
+- **Na pasta Raiz execute os comandos:**
+
+- ``npm install``
+
+**comandos na pasta Raiz para criar os bancos**
+
+-`` npm run db:create --workspace=auth-api ``
+-`` npm run db:migrate --workspace=auth-api ``
+
+
+-`` npm run db:create --workspace=api-gastos ``
+-`` npm run db:migrate --workspace=api-gastos ``
 
 ## Execução do Projeto
 3. **Execução do Projeto**
 
+- execute o ``start-all.bat`` para iniciar o frontend e as apis em novas janelas de terminal.
+
+**ou**
+
 - **Iniciar as APIs:**
-
-- execute o ``start-apis.bat`` para iniciar as APIs em novas janelas de terminal.
-
+- `` cd C:\laragon\www\GastaBem ``
+-`` npm run start:auth-api ``
+-`` npm run start:api-gastos ``
 
 4. **Iniciar o Frontend:**
-Navegue até o diretório do frontend pelo vscode e inicie o servidor de desenvolvimento:
-- `` cd frontend ``
-- ` npm run dev `
+
+- **em um terminal diferente**
+- `` cd C:\laragon\www\GastaBem ``
+- ` npm run start:frontend`
 
 **Acessar a Aplicação:**
 Abra o navegador e acesse ` http://localhost:3000 ` para visualizar o frontend.

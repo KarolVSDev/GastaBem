@@ -20,5 +20,15 @@ if exist api-gastos (
     echo O diretório api-gastos não foi encontrado.
 )
 
-echo Todas as APIs foram iniciadas, se os diretórios existirem.
+REM Verificar se o diretório frontend existe
+if exist frontend (
+    REM Iniciar frontend em uma nova janela de terminal
+    echo Iniciando frontend...
+    start cmd /k "cd frontend && npm start"
+) else (
+    echo O diretório frontend não foi encontrado.
+)
+
+echo O Site foi iniciado
 pause
+
