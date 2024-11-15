@@ -74,7 +74,7 @@ Antes de começar, certifique-se de ter o seguinte software instalado:
 - Na pasta Raiz execute o arquivo de configuração ``setup.bat``
 - O script irá instalar as dependências, criar os bancos de dados e configurar o .gitignore.
 
-## Execução de Projeto
+## Execução do Projeto
 3. **Execução do Projeto**
 
 - **Iniciar as APIs:**
