@@ -6,9 +6,9 @@
 - [Pré-requisitos](#pré-requisitos)
 - [Configuração do Ambiente](#configuração-do-ambiente)
 - [Instalação](#instalação)
-- [Criação dos Bancos de Dados](#criação-dos-bancos-de-dados)
+- [Criação dos Bancos de Dados e instalação de dependencias](#criação-dos-bancos-de-dados-e-instalação-de-dependencias)
 - [Execução do Projeto](#execução-do-projeto)
-- [Considerações Finais](#considerações-finais)
+
 
 ## Introdução
 
@@ -31,7 +31,7 @@ Antes de começar, certifique-se de ter o seguinte software instalado:
 2. **Configurar Variáveis de Ambiente:**
 
 **Ajuste as configurações no arquivo .env conforme necessário para seu ambiente.**
-**Ajuste as configurações no arquivo .env conforme necessário para seu ambiente.**
+
 
    - Crie um arquivo `.env` na raiz de cada API (`auth-api` e `api-gastos`) com o seguinte conteúdo:
 
@@ -57,36 +57,37 @@ Antes de começar, certifique-se de ter o seguinte software instalado:
 
 ## Instalação
 
-**inicie o laragon antes dessa parte**
-**inicie o laragon antes dessa parte**
-**inicie o laragon antes dessa parte**
-**inicie o laragon antes dessa parte**
-
+1.**inicie o laragon antes dessa parte**
+2.**inicie o laragon antes dessa parte**
 
 1. **Clone o Repositório:**
 
-   abra o cmd e use os comandos:
-   ` cd C:\laragon\www `
-   ` git clone https://github.com/seu-usuario/gastabem.git `
-   ` cd gastabem `
+   - **abra o cmd e use os comandos:**
+   - ` cd C:\laragon\www `
+   - ` git clone https://github.com/seu-usuario/gastabem.git `
+   - ` cd gastabem `
+
+## criação dos bancos de dados e instalação de dependencias
+- **criação dos bancos de dados e instalação de dependencias**
 
 2. **Execute o Script de Configuração:**
-na pasta tera o arquivo de configuração [setup.bat]
-O script irá instalar as dependências, criar os bancos de dados e configurar o .gitignore.
+- Na pasta Raiz execute o arquivo de configuração ``setup.bat``
+- O script irá instalar as dependências, criar os bancos de dados e configurar o .gitignore.
 
+## Execução de Projeto
 3. **Execução do Projeto**
 
-Iniciar as APIs:
+- **Iniciar as APIs:**
 
-execute o [start-apis.bat] para iniciar as APIs em novas janelas de terminal:
+- execute o ``start-apis.bat`` para iniciar as APIs em novas janelas de terminal.
 
 
 4. **Iniciar o Frontend:**
-Navegue até o diretório do frontend e inicie o servidor de desenvolvimento:
-cd frontend
-` npm run dev `
+Navegue até o diretório do frontend pelo vscode e inicie o servidor de desenvolvimento:
+- `` cd frontend ``
+- ` npm run dev `
 
-Acessar a Aplicação:
+**Acessar a Aplicação:**
 Abra o navegador e acesse ` http://localhost:3000 ` para visualizar o frontend.
 
 
