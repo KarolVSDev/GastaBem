@@ -53,12 +53,11 @@
         
 
     <script>
-        // Seleciona o elemento de erro no início do script
+       
         const erroSenha = document.getElementById('erro-senha');
         
         document.getElementById('login-form').addEventListener('submit', async function(e) {
             e.preventDefault(); 
-            // Limpa a mensagem de erro anterior
             erroSenha.textContent = '';
             
             const email = document.getElementById('email').value;
