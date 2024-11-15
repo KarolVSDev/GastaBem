@@ -1,13 +1,17 @@
 {
   "name": "auth-api",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "API de login",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "db:create": "sequelize db:create",
+    "db:migrate": "sequelize db:migrate",
+    "db:seed": "sequelize db:seed:all"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["auth", "login", "api", "authentication"],
+  "author": "Emanuel",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
